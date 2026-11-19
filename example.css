@@ -1,22 +1,36 @@
-Frame {
+Window {
     background-color: #ffffff;
     color: #000000;  /* modifies "foreground" attribute" */
     font-family: papyrus;
     /* font-weight: extra-bold; */
     /* padding: 105px; */
-    margin-left:100px;
+    /* margin-left:100px; */
+    min-width: 50px;
+    max-width: 100px;
+    width: 80px;
+
+    min-height: 50px;
+    max-height: 100px;
+    height: 80px;
 }
+
+/*
+Frame {
+    max-height: -1px;
+    max-width: -1px;
+} */
 
 Notebook {
     font-size: 10pt;
     font-weight: heavy;
     font-style: oblique;
     text-decoration: line-through;
+    
 }
 
 StaticText {
     content: "example";
-    /* margin-left: 100px; */
+    margin-left: 100px;
 }
 
 TextCtrl.fingus {

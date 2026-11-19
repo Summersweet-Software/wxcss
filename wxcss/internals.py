@@ -293,6 +293,48 @@ class ApplicationFunctions:
             item = sizer.AddSpacer(value[0].value)
             item.SetUserData(WxCssAutoCreated(window))
 
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_max_width(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+        window.SetMaxSize(wx.Size(value[0].value, window.GetMaxHeight()))
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_max_height(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+        window.SetMaxSize(wx.Size(window.GetMaxWidth(), value[0].value))
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_min_width(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+        window.SetMinSize(wx.Size(value[0].value, window.GetMinHeight()))
+
+    @staticmethod
+    def apply_min_height(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+        window.SetMinSize(wx.Size(window.GetMinWidth(), value[0].value))
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_width(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+        x, y = window.GetPositionTuple()
+        window.SetDimensions(x, y, value[0].value, window.GetSize().Height)
+
+    @staticmethod
+    def apply_height(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+        x, y = window.GetPositionTuple()
+        window.SetDimensions(x, y, window.GetSize().Width, value[0].value)
+
     _mapping = {
         "background-color": apply_background_color,
         "color": apply_foreground_color,
@@ -306,6 +348,12 @@ class ApplicationFunctions:
         "margin-left": apply_margin_left,
         "margin-right": apply_margin_right,
         "padding": apply_padding,
+        "max-width": apply_max_width,
+        "max-height": apply_max_height,
+        "min-width": apply_min_width,
+        "min-height": apply_min_height,
+        "width": apply_width,
+        "height": apply_height,
     }
 
 
