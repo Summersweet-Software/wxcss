@@ -1,6 +1,5 @@
 from cssutils.css import (
     CSSComment,
-    CSSRule,
     CSSRuleList,
     CSSStyleRule,
     CSSStyleSheet,
