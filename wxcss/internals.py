@@ -367,9 +367,11 @@ class ApplicationFunctions:
         for c, item in enumerate(children):
             if item.IsWindow() and item.GetWindow().Id == window.Id:
                 if value[0].value == "none":
-                    item.SetFlag(item.GetFlag() & ~wx.ALL)
+                    window.SetWindowStyleFlag(window.GetWindowStyleFlag() & ~(wx.ALL))
                 else:
-                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.ALL)
+                    window.SetWindowStyleFlag(
+                        window.GetWindowStyleFlag() | wx.SIMPLE_BORDER | wx.ALL
+                    )
                 break
 
     @simple_application_spec(Value)
@@ -385,9 +387,11 @@ class ApplicationFunctions:
         for c, item in enumerate(children):
             if item.IsWindow() and item.GetWindow().Id == window.Id:
                 if value[0].value == "none":
-                    item.SetFlag(item.GetFlag() & ~wx.TOP)
+                    window.SetWindowStyleFlag(window.GetWindowStyleFlag() & ~(wx.TOP))
                 else:
-                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.TOP)
+                    window.SetWindowStyleFlag(
+                        window.GetWindowStyleFlag() | wx.SIMPLE_BORDER | wx.TOP
+                    )
                 break
 
     @simple_application_spec(Value)
@@ -403,9 +407,13 @@ class ApplicationFunctions:
         for c, item in enumerate(children):
             if item.IsWindow() and item.GetWindow().Id == window.Id:
                 if value[0].value == "none":
-                    item.SetFlag(item.GetFlag() & ~wx.BOTTOM)
+                    window.SetWindowStyleFlag(
+                        window.GetWindowStyleFlag() & ~(wx.BOTTOM)
+                    )
                 else:
-                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.BOTTOM)
+                    window.SetWindowStyleFlag(
+                        window.GetWindowStyleFlag() | wx.SIMPLE_BORDER | wx.BOTTOM
+                    )
                 break
 
     @simple_application_spec(Value)
@@ -421,9 +429,11 @@ class ApplicationFunctions:
         for c, item in enumerate(children):
             if item.IsWindow() and item.GetWindow().Id == window.Id:
                 if value[0].value == "none":
-                    item.SetFlag(item.GetFlag() & ~wx.LEFT)
+                    window.SetWindowStyleFlag(window.GetWindowStyleFlag() & ~(wx.LEFT))
                 else:
-                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.LEFT)
+                    window.SetWindowStyleFlag(
+                        window.GetWindowStyleFlag() | wx.SIMPLE_BORDER | wx.LEFT
+                    )
                 break
 
     @simple_application_spec(Value)
@@ -439,9 +449,11 @@ class ApplicationFunctions:
         for c, item in enumerate(children):
             if item.IsWindow() and item.GetWindow().Id == window.Id:
                 if value[0].value == "none":
-                    item.SetFlag(item.GetFlag() & ~wx.RIGHT)
+                    window.SetWindowStyleFlag(window.GetWindowStyleFlag() & ~(wx.RIGHT))
                 else:
-                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.RIGHT)
+                    window.SetWindowStyleFlag(
+                        window.GetWindowStyleFlag() | wx.SIMPLE_BORDER | wx.RIGHT
+                    )
                 break
 
     _mapping = {
