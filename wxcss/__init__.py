@@ -31,11 +31,6 @@ def apply_css(css_data: str, window: wx.Window):
         rules: CSSRuleList = stylesheet.cssRules
         applied_rules = [*previously_applied_rules]
 
-        # apply rules of parents
-        rule: CSSRule
-        for rule in applied_rules:
-            internals.apply_css_rule(rule, window)
-
         for rule in rules:
             match rule:
                 case CSSStyleRule():
