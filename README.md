@@ -7,6 +7,12 @@
 
 Wxcss is a very basic package that adds a handful of helper methods that allow you to style widgets using css.
 
+# Demo
+
+![Demonstration gif](docs/demo.gif)
+
+> Gif showing multiple edits being made to the css and them being applied once the application is reloaded.
+
 ## Basic API
 
 ```python
