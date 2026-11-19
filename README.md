@@ -29,7 +29,16 @@ import wxcss
 # ... wx imports
 
 class AppFrame(wx.Frame):
-    ...
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # * Load the css
+        with open("data/default.css", "r") as f:
+            css_data = f.read()
+            wxcss.apply_css(css_data, self)
+
+        # css loading needs to happen before this call.
+        self.Layout()
 
 class MyApp(wx.App):
     def OnInit(self):
@@ -40,11 +49,6 @@ class MyApp(wx.App):
 
 if __name__ == "__main__":
     app = MyApp(0)
-
-    with open("data/default.css", "r") as f:
-        css_data = f.read()
-        wxcss.apply_css(css_data, app.frame)
-
     app.MainLoop()
 ```
 
@@ -77,6 +81,20 @@ Window {
   text-decoration: underline;
 }
 
+TextCtrl,
+StaticText {
+  content: "some example text";
+
+  /*The following are very laggy!
+    I plan to make these use cython or c for a speedup if possible
+  */
+  margin: 10px;
+  margin-left: 10px;
+  margin-right: 12px;
+
+  padding: 20px;
+}
+
 /*classes and class element selectors are allowed. Combinators are not supported :( */
 Window.some-class {
   min-width: 50px;
@@ -87,6 +105,7 @@ Window.some-class {
   max-height: 100px;
   height: 80px;
 
+  /* This is still being completed and is buggy/non-functional */
   border-width: 15px;
 }
 ```

@@ -328,12 +328,121 @@ class ApplicationFunctions:
         x, y = window.GetPositionTuple()
         window.SetDimensions(x, y, value[0].value, window.GetSize().Height)
 
+    @simple_application_spec(DimensionValue)
     @staticmethod
     def apply_height(window: wx.Window, value: tuple[DimensionValue]):
         if value[0].dimension != "px":
             raise TypeError(value[0].value, "Expected value in px units")
         x, y = window.GetPositionTuple()
         window.SetDimensions(x, y, window.GetSize().Width, value[0].value)
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_border_width(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                item.SetBorder(value[0].value)
+                break
+
+    @simple_application_spec(Value)
+    @staticmethod
+    def apply_border_style(window: wx.Window, value: tuple[Value]):
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                if value[0].value == "none":
+                    item.SetFlag(item.GetFlag() & ~wx.ALL)
+                else:
+                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.ALL)
+                break
+
+    @simple_application_spec(Value)
+    @staticmethod
+    def apply_border_top_style(window: wx.Window, value: tuple[Value]):
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                if value[0].value == "none":
+                    item.SetFlag(item.GetFlag() & ~wx.TOP)
+                else:
+                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.TOP)
+                break
+
+    @simple_application_spec(Value)
+    @staticmethod
+    def apply_border_bottom_style(window: wx.Window, value: tuple[Value]):
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                if value[0].value == "none":
+                    item.SetFlag(item.GetFlag() & ~wx.BOTTOM)
+                else:
+                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.BOTTOM)
+                break
+
+    @simple_application_spec(Value)
+    @staticmethod
+    def apply_border_left_style(window: wx.Window, value: tuple[Value]):
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                if value[0].value == "none":
+                    item.SetFlag(item.GetFlag() & ~wx.LEFT)
+                else:
+                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.LEFT)
+                break
+
+    @simple_application_spec(Value)
+    @staticmethod
+    def apply_border_right_style(window: wx.Window, value: tuple[Value]):
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                if value[0].value == "none":
+                    item.SetFlag(item.GetFlag() & ~wx.RIGHT)
+                else:
+                    item.SetFlag(item.GetFlag() | wx.SOLID | wx.RIGHT)
+                break
 
     _mapping = {
         "background-color": apply_background_color,
@@ -354,6 +463,12 @@ class ApplicationFunctions:
         "min-height": apply_min_height,
         "width": apply_width,
         "height": apply_height,
+        "border-width": apply_border_width,
+        "border-style": apply_border_style,
+        "border-top-style": apply_border_top_style,
+        "border-bottom-style": apply_border_bottom_style,
+        "border-left-style": apply_border_left_style,
+        "border-right-style": apply_border_right_style,
     }
 
 
