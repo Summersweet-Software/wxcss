@@ -1,0 +1,14 @@
+max-width
+==========
+
+It currently only supports :code:`px` units.
+
+
+How To Use
+------------
+
+.. code-block:: css
+
+    Notebook {
+        max-width: 300px;
+    }

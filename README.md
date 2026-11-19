@@ -17,7 +17,7 @@ I feel like wxcss at least makes an attempt to solve this problem. It makes me j
 
 ## Demo
 
-![Demonstration gif](docs/demo.gif)
+![Demonstration gif](docs/source/_static/demo.gif)
 
 > Gif showing multiple edits being made to the css and them being applied once the application is reloaded.
 
