@@ -73,12 +73,7 @@ _FONT_STYLE_MAP = {
 
 
 class WxCssAutoCreated(NamedTuple):
-    # __slots__ = "created_for"
-
     created_for: wx.Window
-
-    # def __init__(self, created_for):
-    # self.created_for = created_for
 
 
 # TODO: break this out into a dll so we can have a speedup [very slow code :(]
@@ -242,7 +237,6 @@ class ApplicationFunctions:
                 # apply or update left margin
                 create_or_update_spacer(sizer, children, c - 1, window, value[0].value)
                 break
-        # window.GetParent().Layout()
 
     @simple_application_spec(DimensionValue)
     @staticmethod
@@ -261,7 +255,6 @@ class ApplicationFunctions:
             if item.IsWindow() and item.GetWindow().Id == window.Id:
                 create_or_update_spacer(sizer, children, c - 1, window, value[0].value)
                 break
-        # window.GetParent().Layout()
 
     @simple_application_spec(DimensionValue)
     @staticmethod
@@ -280,7 +273,6 @@ class ApplicationFunctions:
             if item.IsWindow() and item.GetWindow().Id == window.Id:
                 create_or_update_spacer(sizer, children, c + 1, window, value[0].value)
                 break
-        # window.GetParent().Layout()
 
     @simple_application_spec(DimensionValue)
     @staticmethod
@@ -300,7 +292,6 @@ class ApplicationFunctions:
         else:
             item = sizer.AddSpacer(value[0].value)
             item.SetUserData(WxCssAutoCreated(window))
-        # window.Layout()
 
     _mapping = {
         "background-color": apply_background_color,
