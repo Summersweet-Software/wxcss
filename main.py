@@ -1,5 +1,4 @@
-import wx
-
+import wxcss
 
 import wx
 
@@ -72,12 +71,22 @@ class MyFrame(wx.Frame):
         sizer_3 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_3.Add((0, 0), 0, 0, 0)
 
+        sizer_3.Add(wx.StaticText(self.panel_3, label="Bingus"))
+        txctrl = wx.TextCtrl(self.panel_3)
+        wxcss.set_class(txctrl, "fingus")
+        sizer_3.Add(txctrl)
+
         self.panel_3.SetSizer(sizer_3)
         self.panel_4.SetSizer(sizer_4)
         self.window_1.SplitVertically(self.panel_4, self.notebook_1)
         self.panel_2.SetSizer(sizer_2)
         self.window_2.SplitHorizontally(self.panel_2, self.panel_3)
         self.panel_1.SetSizer(sizer_1)
+
+        with open("example.css", "r") as f:
+            css_data = f.read()
+            wxcss.apply_css(css_data, self)
+
         self.Layout()
         # end wxGlade
 
@@ -95,11 +104,6 @@ class MyApp(wx.App):
 
 def main():
     app = MyApp(0)
-    import wxcss as wxcss
-
-    with open("example.css", "r") as f:
-        css_data = f.read()
-        wxcss.apply_css(css_data, app.frame)
 
     print("Hello from wx-csswidgets!", wx.Window.__name__)
     app.MainLoop()

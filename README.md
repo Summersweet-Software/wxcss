@@ -7,7 +7,15 @@
 
 Wxcss is a very basic package that adds a handful of helper methods that allow you to style widgets using css.
 
-# Demo
+## Why write wxcss?
+
+The reason is simple. I hate using wxpython.
+
+I know that sounds really weird since I am making a wxpython extension. Genuinely though, one of my biggest annoyances with wxpython was the styling. Its the one hold-outs I had into fully embracing wxpython over pyqt/pyside. Its what made me _hate_ it. When, really, its not all that bad of a library.
+
+I feel like wxcss at least makes an attempt to solve this problem. It makes me joyful to mess with UI like how I am when working with pyqt/pyside. I hope this package can do the same for you!
+
+## Demo
 
 ![Demonstration gif](docs/demo.gif)
 

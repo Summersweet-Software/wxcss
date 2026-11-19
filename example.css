@@ -1,28 +1,40 @@
 Frame {
-  background-color: #ffffff;
-  color: #000000; /*modifies "foreground" attribute"*/
-  font-family: papyrus;
-  /* font-weight: extra-bold; */
+    background-color: #ffffff;
+    color: #000000;  /* modifies "foreground" attribute" */
+    font-family: papyrus;
+    /* font-weight: extra-bold; */
+    /* padding: 105px; */
+    margin-left:100px;
 }
 
 Notebook {
-    font-size: 25pt;
-    font-weight: heavier;
-    font-style: italic;
-    text-decoration: underline;
+    font-size: 10pt;
+    font-weight: heavy;
+    font-style: oblique;
+    text-decoration: line-through;
+}
+
+StaticText {
+    content: "example";
+    /* margin-left: 100px; */
+}
+
+TextCtrl.fingus {
+    content: "Sunkle";
+    /* margin-left: 50px; */
 }
 
 /*classes and class element selectors are allowed. Combinators are not supported :( */
 Window.some-class.class2 {
-  min-width: 50px;
-  max-width: 100px;
-  width: 80px;
+    min-width: 50px;
+    max-width: 100px;
+    width: 80px;
 
-  min-height: 50px;
-  max-height: 100px;
-  height: 80px;
+    min-height: 50px;
+    max-height: 100px;
+    height: 80px;
 
-  border-width: 15px;
+    border-width: 15px;
 }
 
 * {

@@ -12,6 +12,15 @@ import cssutils
 from wxcss import internals
 
 
+def set_class(window: wx.Window, cls_name: str):
+    if not hasattr(window, "__css_classes__"):
+        setattr(window, "__css_classes__", [])
+    classes = getattr(window, "__css_classes__")
+    if not isinstance(classes, list):
+        raise TypeError()
+    classes.append(cls_name)
+
+
 def apply_css(css_data: str, window: wx.Window):
     stylesheet: CSSStyleSheet = cssutils.parseString(css_data)
 

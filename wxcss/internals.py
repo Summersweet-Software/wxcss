@@ -1,4 +1,4 @@
-from typing import Protocol
+from typing import NamedTuple, Protocol
 
 from cssutils.css import (
     CSSStyleRule,
@@ -41,7 +41,7 @@ def get_css_element_names(cls: CustomizedCSSElementClass | type) -> list[str]:
 def get_css_classes(window: WidgetWithCSSClasses | wx.Window) -> list[str]:
     """get all css classes on a widget"""
     if hasattr(window, "__css_classes__"):
-        return getattr(window, "__name__")
+        return getattr(window, "__css_classes__")
     return []
 
 
@@ -71,9 +71,34 @@ _FONT_STYLE_MAP = {
     "italic": wx.FONTSTYLE_ITALIC,
 }
 
-_FONT_DECORATION_MAP = {
-    "underline": wx.FONTFLAG_UNDERLINED,
-}
+
+class WxCssAutoCreated(NamedTuple):
+    # __slots__ = "created_for"
+
+    created_for: wx.Window
+
+    # def __init__(self, created_for):
+    # self.created_for = created_for
+
+
+# TODO: break this out into a dll so we can have a speedup [very slow code :(]
+def create_or_update_spacer(
+    sizer: wx.Sizer,
+    children: wx.SizerItemList,
+    index: int,
+    window: wx.Window,
+    value: int,
+):
+    if (
+        (len(children) - 1 > index)
+        and (children[index].IsSpacer())
+        and (type(children[index].UserData) == WxCssAutoCreated)
+        and (children[index].UserData.created_for is window)
+    ):
+        children[index].GetSpacer().Set(value, value)
+    else:
+        item = sizer.InsertSpacer(index, value)
+        item.SetUserData(WxCssAutoCreated(window))
 
 
 class ApplicationFunctions:
@@ -181,6 +206,102 @@ class ApplicationFunctions:
                 font.SetStrikethrough(True)
         window.SetFont(font)
 
+    @simple_application_spec(Value)
+    @staticmethod
+    def apply_content(window: wx.Window, value: tuple[Value]) -> bool:
+        """Applies "content" to various widgets. Can be hijacked to support more widget types.
+        Returns :py:const:`True` if the widget was already handled."""
+        match window:
+            case wx.StaticText():
+                window.SetLabelText(value[0].value)
+            case wx.TextCtrl():
+                window.SetValue(value[0].value)
+            case wx.Button():
+                window.SetLabelText(value[0].value)
+            case _:
+                return False
+        return True
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_margin(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                # apply or update right margin
+                create_or_update_spacer(sizer, children, c + 1, window, value[0].value)
+                # apply or update left margin
+                create_or_update_spacer(sizer, children, c - 1, window, value[0].value)
+                break
+        # window.GetParent().Layout()
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_margin_left(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                create_or_update_spacer(sizer, children, c - 1, window, value[0].value)
+                break
+        # window.GetParent().Layout()
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_margin_right(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+
+        if window.GetParent() is None:
+            return
+        sizer = window.GetParent().GetSizer()
+        if sizer is None:
+            return
+
+        children = sizer.GetChildren()
+        for c, item in enumerate(children):
+            if item.IsWindow() and item.GetWindow().Id == window.Id:
+                create_or_update_spacer(sizer, children, c + 1, window, value[0].value)
+                break
+        # window.GetParent().Layout()
+
+    @simple_application_spec(DimensionValue)
+    @staticmethod
+    def apply_padding(window: wx.Window, value: tuple[DimensionValue]):
+        if value[0].dimension != "px":
+            raise TypeError(value[0].value, "Expected value in px units")
+        sizer = window.GetSizer()
+        if sizer is None:
+            return
+        children = sizer.GetChildren()
+        if len(children) > 0:
+            # Insert at beginning if entry does not exist
+            create_or_update_spacer(sizer, children, 0, window, value[0].value)
+
+            # insert at end if entry doesnt exist
+            create_or_update_spacer(sizer, children, -1, window, value[0].value)
+        else:
+            item = sizer.AddSpacer(value[0].value)
+            item.SetUserData(WxCssAutoCreated(window))
+        # window.Layout()
+
     _mapping = {
         "background-color": apply_background_color,
         "color": apply_foreground_color,
@@ -189,6 +310,11 @@ class ApplicationFunctions:
         "font-family": apply_font_family,
         "font-style": apply_font_style,
         "text-decoration": apply_text_decoration,
+        "content": apply_content,
+        "margin": apply_margin,
+        "margin-left": apply_margin_left,
+        "margin-right": apply_margin_right,
+        "padding": apply_padding,
     }
 
 
@@ -198,4 +324,3 @@ def apply_css_rule(rule: CSSStyleRule, window: wx.Window):
         if property.name not in ApplicationFunctions._mapping.keys():
             continue
         ApplicationFunctions._mapping[property.name](window, property.propertyValue)
-        # print(property)
