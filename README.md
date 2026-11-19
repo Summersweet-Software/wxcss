@@ -1,11 +1,11 @@
-# WxCSSWidgets
+# wxcss
 
 > [!IMPORTANT]
-> WxCSSWidgets its not affiliated with the developers of WxWidgets or WxPython
+> wxcss its not affiliated with the developers of WxWidgets or WxPython
 > It simply works _with_ WxPython and is a library to extend it. Thats it.
 > The developers of WxWidgets/WxPython will not assist you with bugs in this library.
 
-WxCSSWidgets is a very basic package that adds a handful of helper methods that allow you to style widgets using css.
+Wxcss is a very basic package that adds a handful of helper methods that allow you to style widgets using css.
 
 ## Basic API
 
