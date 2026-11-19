@@ -1,0 +1,30 @@
+Frame {
+  background-color: #ffffff;
+  color: #000000; /*modifies "foreground" attribute"*/
+  font-family: papyrus;
+  /* font-weight: extra-bold; */
+}
+
+Notebook {
+    font-size: 25pt;
+    font-weight: heavier;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+/*classes and class element selectors are allowed. Combinators are not supported :( */
+Window.some-class.class2 {
+  min-width: 50px;
+  max-width: 100px;
+  width: 80px;
+
+  min-height: 50px;
+  max-height: 100px;
+  height: 80px;
+
+  border-width: 15px;
+}
+
+* {
+    color: green;
+}
