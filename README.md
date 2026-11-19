@@ -64,6 +64,18 @@ class MyWidget(wx.Window):
         wxcss.set_class(self, "my-css-class")
 ```
 
+**OR**
+
+```python
+import wxcss
+
+class MyWidget(wx.Window):
+    __css_classes__ = ["my-css-class"]
+
+    ...
+
+```
+
 ## Working CSS Features
 
 Below will show you a css example containing all available changeable css properties
