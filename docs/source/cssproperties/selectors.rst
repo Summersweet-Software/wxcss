@@ -7,7 +7,7 @@ Element Selectors
 -------------------
 
 Element selectors are applied using class names or :py:attr:`__css_element_name__` if it exists.
-Sub-classing is supported. For example, selecting all :code:`Window` elements will select everything subclassing py:class:`wx.Window`
+Sub-classing is supported. For example, selecting all :code:`Window` elements will select everything subclassing :py:class:`wx.Window`
 
 Class Selectors
 -----------------
