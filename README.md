@@ -62,8 +62,11 @@ Frame,
 Window {
   background-color: #ffffff;
   color: #000000; /*modifies "foreground" attribute"*/
-  font-family: sans-serif;
+  font-family: papyrus;
   font-size: 10px;
+  font-weight: heavier;
+  font-style: italic;
+  text-decoration: underline;
 }
 
 /*classes and class element selectors are allowed. Combinators are not supported :( */
