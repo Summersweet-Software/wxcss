@@ -1,3 +1,5 @@
+[![](https://img.shields.io/github/license/summersweet-software/wxcss)](https://github.com/Summersweet-Software/wxcss?tab=MIT-1-ov-file) [![Read the Docs](https://img.shields.io/readthedocs/wxcss)](https://wxcss.readthedocs.io/en/latest/)
+
 # wxcss
 
 > [!IMPORTANT]
