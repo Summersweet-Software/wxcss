@@ -1,9 +1,52 @@
 [project]
 name = "wxcss"
 version = "0.1.0"
-description = "A work-in-progress package to help you apply css files to wxpython ui"
+description = "A work-in-progress package to help you apply css stylesheets to WxPython ui."
 readme = "README.md"
 requires-python = ">=3.13"
+
+authors = [{ name = "ArachnidAbby" }, { name = "Summersweet-Software" }]
+
+license = { text = "MPL-2.0" }
+keywords = [
+    "typed",
+    "wxpython",
+    "wxwidgets",
+    "css",
+    "wxcss",
+    "stylesheets",
+    "wx",
+]
+
+classifiers = [
+    # How mature is this project? Common values are
+    #   3 - Alpha
+    #   4 - Beta
+    #   5 - Production/Stable
+    "Development Status :: 3 - Alpha",
+
+    # Indicate who your project is intended for
+    "Intended Audience :: Developers",
+    # topic
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: User Interfaces",
+
+    # framework
+    "Framework :: WxPython",
+
+    # Specify the Python versions you support here.
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    # Licensing
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    # OS
+    "Operating System :: OS Independent",
+    # other
+    "Natural Language :: English",
+    "Typing :: Typed",
+]
+
 dependencies = ["cssutils>=2.15.0", "wxpython>=4.3.2"]
 
 [dependency-groups]
@@ -12,3 +55,27 @@ dev = [
     "sphinx-rtd-theme>=3.1.0",
     "sphinx-autobuild>=2025.8.25",
 ]
+
+[project.urls]
+Homepage = "https://summersweet.software"
+Repository = "https://github.com/summersweet-software/wxcss"
+Issues = "https://github.com/summersweet-software/wxcss/issues"
+Documentation = "https://wxcss.readthedocs.io/en/latest/"
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
+
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv]
+package = true
+
+[tool.uv.build-backend]
+modules = ["wxcss"]
+module-root = ""
