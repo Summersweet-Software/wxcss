@@ -21,6 +21,10 @@ jobs:
         uses: astral-sh/setup-uv@v7
       - name: Install Python 3.13
         run: uv python install 3.13
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev xvfb freeglut3-dev libgstreamer1.0-dev
       - name: Build
         run: uv build
       - name: Publish
