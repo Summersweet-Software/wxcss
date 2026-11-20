@@ -31,9 +31,6 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "Topic :: Software Development :: User Interfaces",
 
-    # framework
-    "Framework :: WxPython",
-
     # Specify the Python versions you support here.
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.13",
