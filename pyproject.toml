@@ -4,14 +4,11 @@ version = "0.1.0"
 description = "A work-in-progress package to help you apply css files to wxpython ui"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-    "cssutils>=2.15.0",
-    "sphinx-rtd-theme>=3.1.0",
-    "wxpython>=4.3.2",
-]
+dependencies = ["cssutils>=2.15.0", "wxpython>=4.3.2"]
 
 [dependency-groups]
 dev = [
     "sphinx>=9.2.0",
+    "sphinx-rtd-theme>=3.1.0",
     "sphinx-autobuild>=2025.8.25",
 ]
