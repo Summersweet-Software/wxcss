@@ -1,4 +1,5 @@
 [![](https://img.shields.io/github/license/summersweet-software/wxcss)](https://github.com/Summersweet-Software/wxcss?tab=MIT-1-ov-file) [![Read the Docs](https://img.shields.io/readthedocs/wxcss)](https://wxcss.readthedocs.io/en/latest/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/wxcss)](https://pypi.org/project/wxcss/) [![GitHub Sponsors](https://img.shields.io/github/sponsors/summersweet-software)](https://github.com/sponsors/Summersweet-Software)
 
 # wxcss
 
@@ -6,6 +7,9 @@
 > wxcss its not affiliated with the developers of WxWidgets or WxPython
 > It simply works _with_ WxPython and is a library to extend it. Thats it.
 > The developers of WxWidgets/WxPython will not assist you with bugs in this library.
+> Additionally:
+> if you view this on pypi, the github is summersweet-software/wxcss. NOT skrulcik/wxcss.
+> the skrulcik repository is extremely old and is not related to this project.
 
 Wxcss is a very basic package that adds a handful of helper methods that allow you to style widgets using css.
 
