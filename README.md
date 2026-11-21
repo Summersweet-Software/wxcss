@@ -23,7 +23,7 @@ I feel like wxcss at least makes an attempt to solve this problem. It makes me j
 
 ## Demo
 
-![Demonstration gif](docs/source/_static/demo.gif)
+![Demonstration gif](https://github.com/Summersweet-Software/wxcss/blob/main/docs/source/_static/demo.gif?raw=true)
 
 > Gif showing multiple edits being made to the css and them being applied once the application is reloaded.
 
